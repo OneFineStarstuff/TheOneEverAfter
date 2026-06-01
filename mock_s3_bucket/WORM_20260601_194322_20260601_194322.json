@@ -1,0 +1,13 @@
+{
+  "batch_id": "20260601_194322",
+  "timestamp": "20260601_194322",
+  "entries": [
+    {
+      "timestamp": "2026-06-01 19:43:22",
+      "G-SRI": 0.88,
+      "status": "GREEN",
+      "PCR_MATCH": true
+    }
+  ],
+  "pqc_signature": "8171b7d5a175c52bc511834784d8e7c1a4b387245623338ef68c17126557e1e656c2f42ef5ddbd4d7446e61417b1ab2372e361fcf551f325d12e10d1e37b01ac"
+}
