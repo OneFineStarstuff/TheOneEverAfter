@@ -1,0 +1,16 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+authors:
+- name: "Omni-Sentinel Contributors"
+title: "Omni-Sentinel Cognitive Execution Environment"
+version: 1.0.0
+date-released: 2026-06-01
+url: "https://github.com/omni-sentinel/omni-sentinel"
+repository-code: "https://github.com/omni-sentinel/omni-sentinel"
+license: MIT
+type: software
+keywords:
+  - post-quantum cryptography
+  - hardware attestation
+  - bayesian risk
+  - AI governance

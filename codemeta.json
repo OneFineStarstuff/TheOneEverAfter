@@ -1,0 +1,31 @@
+{
+    "@context": "https://w3id.org/codemeta/3.0",
+    "@type": "SoftwareSourceCode",
+    "license": "https://spdx.org/licenses/MIT.html",
+    "codeRepository": "https://github.com/omni-sentinel/omni-sentinel",
+    "datePublished": "2026-06-01",
+    "name": "Omni-Sentinel Cognitive Execution Environment",
+    "version": "1.0.0",
+    "description": "High-assurance governance and execution framework for cognitive agents and AI systems.",
+    "author": [
+        {
+            "@type": "Organization",
+            "name": "Omni-Sentinel Contributors"
+        }
+    ],
+    "programmingLanguage": [
+        "Python"
+    ],
+    "developmentStatus": "https://www.repostatus.org/#active",
+    "softwareRequirements": [
+        "numpy",
+        "oqs-python"
+    ],
+    "keywords": [
+        "PQC",
+        "TPM",
+        "Bayesian",
+        "AI safety"
+    ],
+    "runtimePlatform": "Linux"
+}
