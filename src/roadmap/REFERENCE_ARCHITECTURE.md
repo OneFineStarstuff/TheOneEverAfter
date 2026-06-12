@@ -16,6 +16,8 @@ Logs are signed using Post-Quantum Cryptographic algorithms (ML-DSA) to ensure l
 ### TPM Attestor
 Verifies that the cognitive environment (OS, Drivers, Orchestrator) has not been tampered with before allowing high-risk cognitive tasks.
 
-## 3. Regulatory Compliance
+## 3. Regulatory Compliance & Remediation
+- **MAS FEAT (Fairness, Ethics, Accountability and Transparency)**: Implements ZK-Fairness proofs for retail-facing Mixture of Experts (MoE) nodes, ensuring Demographic Parity.
+- **HKMA Ethics Compliance**: ASA Interpretability Layer using Contextual Attribution Envelopes (CAE) for model accountability.
 - **ZK-Snarks**: Used for proving compliance with safety constraints without leaking proprietary model weights or internal telemetry details.
 - **OSCAL**: Standardized machine-readable compliance documentation for automated audits.
