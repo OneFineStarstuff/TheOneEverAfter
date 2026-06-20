@@ -3,6 +3,7 @@ import time
 import json
 import os
 
+
 class PQCWormLogger:
     """
     ML-DSA signed WORM audit logging simulation.
@@ -40,6 +41,7 @@ class PQCWormLogger:
             json.dump(batch_data, f, indent=2)
 
         return filename
+
 
 if __name__ == "__main__":
     logger = PQCWormLogger()
