@@ -1,6 +1,7 @@
 import numpy as np
 from src.governance_engine.compliance_engine import ComplianceEngine
 
+
 class GSRIScoringEngine:
     """
     Bayesian-based systemic risk monitor for the Omni-Sentinel environment.
@@ -49,6 +50,7 @@ class GSRIScoringEngine:
                 return False
 
         return gsri < self.threshold
+
 
 if __name__ == "__main__":
     engine = GSRIScoringEngine()

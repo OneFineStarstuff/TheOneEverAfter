@@ -2,6 +2,7 @@ import unittest
 from src.governance_engine.compliance_engine import ComplianceEngine, MASFEATCompliance, HKMAEthicsCompliance
 from src.governance_engine.gsri_scoring_engine import GSRIScoringEngine
 
+
 class TestComplianceSystem(unittest.TestCase):
     def setUp(self):
         self.engine = ComplianceEngine()
@@ -34,7 +35,7 @@ class TestComplianceSystem(unittest.TestCase):
         gsri_engine = GSRIScoringEngine()
         telemetry = {
             "drift": 0.05,
-            "selection_rates": {"a": 0.5, "b": 0.8} # Unfair
+            "selection_rates": {"a": 0.5, "b": 0.8}  # Unfair
         }
         gsri = gsri_engine.calculate_gsri(telemetry)
         compliance = gsri_engine.verify_compliance(telemetry)
@@ -42,6 +43,7 @@ class TestComplianceSystem(unittest.TestCase):
         self.assertFalse(gsri_engine.is_safe(gsri, compliance))
         self.assertFalse(compliance["mas_feat"]["fairness_verified"])
         self.assertEqual(compliance["ethics_maturity_score"], 3.0)
+
 
 if __name__ == "__main__":
     unittest.main()

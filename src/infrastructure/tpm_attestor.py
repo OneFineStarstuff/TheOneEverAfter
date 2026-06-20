@@ -1,5 +1,6 @@
 import hashlib
 
+
 class TPMAttestor:
     """
     TEE/TPM PCR attestation simulation.
@@ -8,9 +9,9 @@ class TPMAttestor:
     def __init__(self):
         # Simulated Golden PCR values (Simplified)
         self.golden_pcr = {
-            "PCR_0": "a1b2c3d4e5f6g7h8i9j0", # Core Boot
-            "PCR_7": "f6g7h8i9j0a1b2c3d4e5", # Secure Boot State
-            "PCR_10": "c3d4e5f6g7h8i9j0a1b2" # IMA logs
+            "PCR_0": "a1b2c3d4e5f6g7h8i9j0",  # Core Boot
+            "PCR_7": "f6g7h8i9j0a1b2c3d4e5",  # Secure Boot State
+            "PCR_10": "c3d4e5f6g7h8i9j0a1b2"  # IMA logs
         }
 
     def measure_runtime_pcr(self):
@@ -28,6 +29,7 @@ class TPMAttestor:
             "status": "VALIDATED" if is_match else "ATTACK_DETECTED",
             "evidence": hashlib.sha256(str(current_pcr).encode()).hexdigest()
         }
+
 
 if __name__ == "__main__":
     attestor = TPMAttestor()

@@ -2,6 +2,7 @@ import hashlib
 import json
 import numpy as np
 
+
 class MASFEATCompliance:
     """
     Implements MAS FEAT (Fairness, Ethics, Accountability and Transparency) compliance.
@@ -43,6 +44,7 @@ class MASFEATCompliance:
             "metrics": {"dp_diff": round(dp_diff, 4)}
         }
 
+
 class HKMAEthicsCompliance:
     """
     Implements HKMA Ethics compliance.
@@ -71,11 +73,12 @@ class HKMAEthicsCompliance:
         }
         return envelope
 
+
 class ComplianceEngine:
     def __init__(self):
         self.mas_feat = MASFEATCompliance()
         self.hkma_ethics = HKMAEthicsCompliance()
-        self.maturity_score = 3.0 # Target Maturity Score for Q4 2026
+        self.maturity_score = 3.0  # Target Maturity Score for Q4 2026
 
     def run_remediation_audit(self, telemetry):
         """

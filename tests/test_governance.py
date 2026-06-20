@@ -6,6 +6,7 @@ from src.governance_engine.gsri_scoring_engine import GSRIScoringEngine
 from src.infrastructure.pqc_worm_logger import PQCWormLogger
 from src.infrastructure.tpm_attestor import TPMAttestor
 
+
 class TestGovernanceSystem(unittest.TestCase):
     def setUp(self):
         self.test_bucket = "test_worm_bucket"
@@ -49,6 +50,7 @@ class TestGovernanceSystem(unittest.TestCase):
         result = attestor.validate_attestation()
         self.assertTrue(result["PCR_MATCH"])
         self.assertEqual(result["status"], "VALIDATED")
+
 
 if __name__ == "__main__":
     unittest.main()
