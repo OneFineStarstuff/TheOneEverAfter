@@ -35,8 +35,8 @@ class MASFEATCompliance:
             "timestamp": str(np.datetime64('now'))
         }
 
-        # Simulate a ZK-proof hash
-        proof_hash = hashlib.sha256(json.dumps(proof_data, sort_keys=True).encode()).hexdigest()
+        # Simulate a ZK-proof hash using SHA3-512 for high-assurance compliance
+        proof_hash = hashlib.sha3_512(json.dumps(proof_data, sort_keys=True).encode()).hexdigest()
 
         return {
             "proof_hash": proof_hash,
@@ -61,6 +61,13 @@ class HKMAEthicsCompliance:
         if not attribution_data:
             return {}
 
+        # Simulated attribution score calculation
+        # In a real scenario, this would be derived from model explainability metrics
+        # Here we use a stable mock based on the input variance if available
+        base_score = 0.95
+        variance = attribution_data.get("input_variance", 0.0)
+        attribution_score = min(0.99, max(0.85, base_score - abs(variance)))
+
         # CAE is a structured interpretability wrapper
         envelope = {
             "version": "1.0",
@@ -69,7 +76,8 @@ class HKMAEthicsCompliance:
                 "max": round(max(attribution_data.values()), 4)
             },
             "attributions": {k: round(v, 4) for k, v in attribution_data.items()},
-            "integrity_seal": hashlib.sha256(str(attribution_data).encode()).hexdigest()
+            "attribution_score": round(attribution_score, 4),
+            "integrity_seal": hashlib.sha3_512(str(attribution_data).encode()).hexdigest()
         }
         return envelope
 

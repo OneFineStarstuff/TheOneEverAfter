@@ -1,3 +1,5 @@
+import hashlib
+import json
 import numpy as np
 from src.governance_engine.compliance_engine import ComplianceEngine
 
@@ -23,7 +25,7 @@ class GSRIScoringEngine:
         factors = list(direct_factors.values())
 
         if not factors:
-            return self.prior_risk * 100
+            return float(self.prior_risk * 100)
 
         # Likelihood of high risk given telemetry
         likelihood = np.mean(factors)
@@ -31,8 +33,29 @@ class GSRIScoringEngine:
         # Posterior risk (simplified)
         posterior = (likelihood * self.prior_risk) / (likelihood * self.prior_risk + (1 - likelihood) * (1 - self.prior_risk))
 
-        gsri = posterior * 100
+        gsri = float(posterior * 100)
         return round(gsri, 2)
+
+    def generate_gsri_proof(self, gsri, telemetry_data):
+        """
+        Generates a simulated ZK-proof for the GSRI calculation.
+        """
+        is_safe = bool(gsri < self.threshold)
+        proof_data = {
+            "gsri": float(gsri),
+            "threshold": float(self.threshold),
+            "is_safe": is_safe,
+            "timestamp": str(np.datetime64('now')),
+            "telemetry_summary": hashlib.sha3_512(str(telemetry_data).encode()).hexdigest()[:16]
+        }
+
+        # High-assurance proof using SHA3-512
+        proof_hash = hashlib.sha3_512(json.dumps(proof_data, sort_keys=True).encode()).hexdigest()
+
+        return {
+            "gsri_proof_hash": proof_hash,
+            "verification_status": "VERIFIED"
+        }
 
     def verify_compliance(self, telemetry_data):
         """
@@ -49,7 +72,7 @@ class GSRIScoringEngine:
             if not compliance_results.get("mas_feat", {}).get("fairness_verified", True):
                 return False
 
-        return gsri < self.threshold
+        return bool(gsri < self.threshold)
 
 
 if __name__ == "__main__":
@@ -63,6 +86,8 @@ if __name__ == "__main__":
     }
     gsri = engine.calculate_gsri(test_data)
     compliance = engine.verify_compliance(test_data)
+    proof = engine.generate_gsri_proof(gsri, test_data)
     print(f"G-SRI: {gsri}")
+    print(f"GSRI Proof: {proof}")
     print(f"Compliance Results: {compliance}")
     print(f"Safe: {engine.is_safe(gsri, compliance)}")

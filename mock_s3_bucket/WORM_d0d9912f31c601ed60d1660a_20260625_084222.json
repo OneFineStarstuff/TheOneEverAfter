@@ -1,0 +1,19 @@
+{
+  "batch_id": "d0d9912f31c601ed60d1660a",
+  "timestamp": "20260625_084222",
+  "entries": [
+    {
+      "timestamp": "2026-06-25 08:42:22",
+      "iteration": 1,
+      "G-SRI": 21.47,
+      "G-SRI_proof": "bcf71fe9650a939f370b0dc6fa44bb68b597d2296d203005ce5ead884dec519570eabd602c3c966ec5cfa30fc1c912866851d8f8bcd82968f27db67cb1bdcfe2",
+      "status": "GREEN",
+      "PCR_MATCH": true,
+      "regulatory_audit": {
+        "mas_feat_proof": "5c4d050dc76a7dbe2f80cb179689ce1641bdabd3b7255bfb0e5e13e12d29ef8bd05190dfa89bac2d8692e44d48dba796d94f6759217e06ee1d695905d24b2afb",
+        "hkma_ethics_cae_seal": "c6064814a9555aef861c9b59c49be1885941e5f6d7ae0ea73f836b051fbf84d14ea867a9311c8e45bbc80de57eef7c93d15d611eb4a827c8d4fda980ee02f1c3"
+      }
+    }
+  ],
+  "pqc_signature": "3b5e88df7d025df6a73f1034eb21be65d6e9c66efc2461d414efc74d5c9965a1429090aec42c6f5576f8322eb8bbba25d42f83a7922c4d53778737bcdf50fc56"
+}

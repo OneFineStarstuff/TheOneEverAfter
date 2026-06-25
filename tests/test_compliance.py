@@ -29,6 +29,7 @@ class TestComplianceSystem(unittest.TestCase):
         self.assertEqual(cae["version"], "1.0")
         self.assertEqual(cae["contextual_bounds"]["max"], 0.45)
         self.assertEqual(cae["contextual_bounds"]["min"], -0.12)
+        self.assertIn("attribution_score", cae)
         self.assertIn("integrity_seal", cae)
 
     def test_gsri_compliance_integration(self):

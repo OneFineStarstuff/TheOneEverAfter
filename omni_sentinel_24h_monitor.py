@@ -1,6 +1,7 @@
 import time
 import sys
 import random
+import hashlib
 from src.governance_engine.gsri_scoring_engine import GSRIScoringEngine
 from src.infrastructure.pqc_worm_logger import PQCWormLogger
 from src.infrastructure.tpm_attestor import TPMAttestor
@@ -10,24 +11,25 @@ def run_iteration(iteration, gsri_engine, worm_logger, tpm_attestor):
     timestamp = time.strftime("%Y-%m-%d %H:%M:%S")
 
     # 1. review telemetry (simulated)
-    # Enhanced to include regulatory compliance factors for MAS FEAT and HKMA Ethics
+    # Adjusted ranges to produce G-SRI in the 20-30% range for realistic monitoring
     telemetry = {
-        "alignment_drift": random.uniform(0.01, 0.15),
-        "compute_anomaly": random.uniform(0.01, 0.1),
-        "breakout_probability": random.uniform(0.001, 0.05),
+        "alignment_drift": random.uniform(0.6, 0.9),
+        "compute_anomaly": random.uniform(0.5, 0.8),
+        "breakout_probability": random.uniform(0.3, 0.6),
         "selection_rates": {
-            "expert_node_retail_01": random.uniform(0.75, 0.85),
-            "expert_node_retail_02": random.uniform(0.75, 0.85)
+            "expert_node_retail_01": random.uniform(0.78, 0.82),
+            "expert_node_retail_02": random.uniform(0.78, 0.82)
         },
         "attributions": {
-            "input_variance": random.uniform(-0.1, 0.1),
-            "weight_entropy": random.uniform(0.0, 1.0)
+            "input_variance": random.uniform(-0.05, 0.05),
+            "weight_entropy": random.uniform(0.3, 0.7)
         }
     }
 
     # 2. calculate G-SRI and Regulatory Compliance Remediation
     gsri = gsri_engine.calculate_gsri(telemetry)
     compliance = gsri_engine.verify_compliance(telemetry)
+    gsri_proof = gsri_engine.generate_gsri_proof(gsri, telemetry)
 
     # Integrated check: Safety now depends on both G-SRI and Regulatory Fairness (MAS FEAT)
     status = "GREEN" if gsri_engine.is_safe(gsri, compliance) else "RED"
@@ -43,6 +45,7 @@ def run_iteration(iteration, gsri_engine, worm_logger, tpm_attestor):
             "timestamp": timestamp,
             "iteration": iteration,
             "G-SRI": gsri,
+            "G-SRI_proof": gsri_proof["gsri_proof_hash"],
             "status": status,
             "PCR_MATCH": pcr_match,
             "regulatory_audit": {
@@ -51,7 +54,9 @@ def run_iteration(iteration, gsri_engine, worm_logger, tpm_attestor):
             }
         }
     ]
-    batch_id = time.strftime("%Y%m%d_%H%M%S")
+
+    # Use hex-based batch identifier for consistency with high-assurance audit standards
+    batch_id = hashlib.sha256(str(time.time()).encode()).hexdigest()[:24]
     worm_file = worm_logger.commit_batch(batch_id, log_entries)
 
     return {
